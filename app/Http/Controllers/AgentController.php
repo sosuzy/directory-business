@@ -88,15 +88,12 @@ $region = Region::where('name', $request->region)->first();
     public function edit(User $agent)
     {
         
-        // Get the article with the associated categories
-    //$agent = User::with('region');
+       $user_region = $agent->regions()->get();
+       $regions = Region::all();
 
-    // Get the categories
-    $options = Region::all();
 
-    // return to the view
   
-        return view('admin.agents.edit', compact('agent','options'));
+        return view('admin.agents.edit', compact('agent','regions','user_region'));
     }
 
     /**
@@ -108,11 +105,7 @@ $region = Region::where('name', $request->region)->first();
      */
     public function update(AgentRequest $request, User $agent)
     {
-       $region = App\Region::find(1);
-
-      $user->region()->associate($region);
-
-       $user->save();
+       $agent->update($request->all());
         return redirect()->route('agents.index')->with('message','Agent has been updated');
             }
 
