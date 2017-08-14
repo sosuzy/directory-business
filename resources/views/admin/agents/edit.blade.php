@@ -17,13 +17,15 @@
        {!! Form::label('email','Email') !!}
           {!! Form::email('email',null,['class'=>'form-control']) !!}
     </div>
-      <div class="form-group">
-      
-       {!! Form::label('region','Region') !!}
-       
-       {!! Form::select('region[]', $options->name, null, ['class' => 'form-control', 'multiple']) !!}
+    <!--$user_region[0]->name-->
+     @foreach($user_region as $ur)
+     <p>{{$ur->name}}</p>
+     @endforeach
+       <select name="region" class="form-control" >
+      @foreach($regions as $region)
+        <option value="{{ $region->name }} "> {{ $region->name }} </option>
+      @endforeach
 </select>
-    </div>
    
     <div class="form-group">
    
